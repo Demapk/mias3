@@ -18,9 +18,7 @@
     -->
     <changeSet id="20180511010546-1" author="jhipster">
         <createTable tableName="doctor">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+
             <column name="first_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -37,7 +35,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="speciality_id" type="bigint">
                 <constraints nullable="true" />
@@ -49,7 +47,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

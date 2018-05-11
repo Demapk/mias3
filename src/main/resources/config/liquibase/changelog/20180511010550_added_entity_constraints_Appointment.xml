@@ -7,17 +7,17 @@
         Added the constraints for entity Appointment.
     -->
     <changeSet id="20180511010550-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="doctor_id"
                                  baseTableName="appointment"
                                  constraintName="fk_appointment_doctor_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="user_id"
                                  referencedTableName="doctor"/>
 
         <addForeignKeyConstraint baseColumnNames="patient_id"
                                  baseTableName="appointment"
                                  constraintName="fk_appointment_patient_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="user_id"
                                  referencedTableName="patient"/>
 
     </changeSet>
