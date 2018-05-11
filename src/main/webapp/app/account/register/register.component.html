@@ -28,6 +28,21 @@
         <div class="col-md-8">
             <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
                 <div class="form-group">
+                    <label class="form-control-label" for="firstName" jhiTranslate="global.form.firstname">Firstname</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.firstName" id="firstName" name="firstName" #firstName="ngModel"
+                           required minlength="1" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="lastName" jhiTranslate="global.form.lastname">Lasttname</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.lastName" id="lastName" name="lastName" #lastName="ngModel"
+                           required minlength="1" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="patronymic" jhiTranslate="global.form.patronymic">Patronymic</label>
+                    <input type="text" class="form-control" [(ngModel)]="registerAccount.patronymic" id="patronymic" name="patronymic" #patronymic="ngModel"
+                           required minlength="1" maxlength="50">
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" for="login" jhiTranslate="global.form.username">Username</label>
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
                             required minlength="1" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$">

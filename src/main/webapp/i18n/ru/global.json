@@ -46,7 +46,10 @@
             "confirmpassword": "Подтверждение нового пароля",
             "confirmpassword.placeholder": "Подтвердите новый пароль",
             "email": "Email",
-            "email.placeholder": "Ваш email"
+            "email.placeholder": "Ваш email",
+            "firstname": "Ваше имя",
+            "lastname": "Ваша фамилия",
+            "patronymic": "Ваше отчество"
         },
         "messages": {
             "info": {

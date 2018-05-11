@@ -1,10 +1,11 @@
 package ru.kpfu.service;
 
-import ru.kpfu.config.CacheConfiguration;
 import ru.kpfu.domain.Authority;
+import ru.kpfu.domain.Patient;
 import ru.kpfu.domain.User;
 import ru.kpfu.repository.AuthorityRepository;
 import ru.kpfu.config.Constants;
+import ru.kpfu.repository.PatientRepository;
 import ru.kpfu.repository.UserRepository;
 import ru.kpfu.security.AuthoritiesConstants;
 import ru.kpfu.security.SecurityUtils;
@@ -43,11 +44,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final PatientRepository patientRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, PatientRepository patientRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.patientRepository = patientRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -115,6 +119,44 @@ public class UserService {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+
+    public User registerUser(UserDTO userDTO, String password, String patronymic) {
+
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Authority authorityPatient = authorityRepository.findOne(AuthoritiesConstants.PATIENT);
+        Set<Authority> authorities = new HashSet<>();
+        String encryptedPassword = passwordEncoder.encode(password);
+        newUser.setLogin(userDTO.getLogin());
+        // new user gets initially a generated password
+        newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(userDTO.getFirstName());
+        newUser.setLastName(userDTO.getLastName());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setImageUrl(userDTO.getImageUrl());
+        newUser.setLangKey(userDTO.getLangKey());
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authority);
+        authorities.add(authorityPatient);
+        newUser.setAuthorities(authorities);
+//        newUser = userRepository.save(newUser);
+        cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
+        cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
+        log.debug("Created Information for User: {}, id = {}", newUser, newUser.getId());
+
+        Patient patient = new Patient();
+        patient.setUser(newUser);
+        patient.setFirstName(userDTO.getFirstName());
+        patient.setLastName(userDTO.getLastName());
+        patient.setPatronymic(patronymic);
+        patientRepository.save(patient);
+        log.debug("Created Information for Patient: {}", patient);
+
         return newUser;
     }
 
