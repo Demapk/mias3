@@ -1,0 +1,28 @@
+
+{
+    "miasApp": {
+        "doctor" : {
+            "home": {
+                "title": "Doctors",
+                "createLabel": "Create a new Doctor",
+                "createOrEditLabel": "Create or edit a Doctor"
+            },
+            "created": "A new Doctor is created with identifier {{ param }}",
+            "updated": "A Doctor is updated with identifier {{ param }}",
+            "deleted": "A Doctor is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Doctor {{ id }}?"
+            },
+            "detail": {
+                "title": "Doctor"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "patronymic": "Patronymic",
+            "info": "Info",
+            "user": "User",
+            "speciality": "Speciality",
+            "healthFacility": "Health Facility"
+        }
+    }
+}

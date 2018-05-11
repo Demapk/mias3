@@ -1,0 +1,46 @@
+
+<div *ngIf="patient">
+    <h2><span jhiTranslate="miasApp.patient.detail.title">Patient</span> {{patient.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="miasApp.patient.firstName">First Name</span></dt>
+        <dd>
+            <span>{{patient.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.patient.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{patient.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.patient.patronymic">Patronymic</span></dt>
+        <dd>
+            <span>{{patient.patronymic}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.patient.birthDay">Birth Day</span></dt>
+        <dd>
+            <span>{{patient.birthDay | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.patient.gender">Gender</span></dt>
+        <dd>
+            <span jhiTranslate="{{'miasApp.Gender.' + patient.gender}}">{{patient.gender}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.patient.user">User</span></dt>
+        <dd>
+            {{patient.userId}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'patient/'+ patient.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

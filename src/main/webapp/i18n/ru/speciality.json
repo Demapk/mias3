@@ -1,0 +1,23 @@
+
+{
+    "miasApp": {
+        "speciality" : {
+            "home": {
+                "title": "Specialities",
+                "createLabel": "Создать новый Speciality",
+                "createOrEditLabel": "Создать или отредактировать Speciality"
+            },
+            "created": "Новый Speciality создан с идентификатором {{ param }}",
+            "updated": "Speciality обновлен с идентификатором {{ param }}",
+            "deleted": "Speciality удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Speciality {{ id }}?"
+            },
+            "detail": {
+                "title": "Speciality"
+            },
+            "speciality": "Speciality",
+            "doctor": "Doctor"
+        }
+    }
+}

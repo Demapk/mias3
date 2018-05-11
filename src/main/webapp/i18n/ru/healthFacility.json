@@ -1,0 +1,25 @@
+
+{
+    "miasApp": {
+        "healthFacility" : {
+            "home": {
+                "title": "Health Facilities",
+                "createLabel": "Создать новый Health Facility",
+                "createOrEditLabel": "Создать или отредактировать Health Facility"
+            },
+            "created": "Новый Health Facility создан с идентификатором {{ param }}",
+            "updated": "Health Facility обновлен с идентификатором {{ param }}",
+            "deleted": "Health Facility удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Health Facility {{ id }}?"
+            },
+            "detail": {
+                "title": "Health Facility"
+            },
+            "name": "Name",
+            "address": "Address",
+            "phoneNumber": "Phone Number",
+            "doctor": "Doctor"
+        }
+    }
+}

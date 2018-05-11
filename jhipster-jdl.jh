@@ -1,0 +1,60 @@
+entity Doctor {
+	firstName String,
+    lastName String,
+    patronymic String,
+    info String
+}
+
+entity Speciality {
+	speciality String
+}
+
+entity HealthFacility {
+	name String,
+    address String,
+    phoneNumber String
+}
+
+entity Patient {
+	firstName String,
+    lastName String,
+    patronymic String,
+    birthDay LocalDate,
+    gender Gender
+}
+
+entity Appointment {
+	startTime Instant,
+    endTime Instant,
+    status AppointmentStatus
+}
+
+enum AppointmentStatus {
+	FREE, BUSY
+}
+
+enum Gender {
+	MALE, FEMALE, OTHER
+}
+
+relationship OneToOne {
+	Patient{user} to User,
+    Doctor{user} to User
+}
+
+relationship ManyToOne {
+	Appointment{doctor} to Doctor,
+    Appointment{patient} to Patient
+}
+
+relationship OneToMany {
+	Speciality{doctor} to Doctor{speciality},
+    HealthFacility{doctor} to Doctor{healthFacility}
+}
+
+paginate Doctor with pagination
+
+dto * with mapstruct
+
+service all with serviceClass
+

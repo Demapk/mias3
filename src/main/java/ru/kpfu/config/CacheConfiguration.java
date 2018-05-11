@@ -45,6 +45,13 @@ public class CacheConfiguration {
             cm.createCache(ru.kpfu.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(ru.kpfu.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(ru.kpfu.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Doctor.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Speciality.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Speciality.class.getName() + ".doctors", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.HealthFacility.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.HealthFacility.class.getName() + ".doctors", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Patient.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Appointment.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

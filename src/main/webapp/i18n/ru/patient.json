@@ -1,0 +1,27 @@
+
+{
+    "miasApp": {
+        "patient" : {
+            "home": {
+                "title": "Patients",
+                "createLabel": "Создать новый Patient",
+                "createOrEditLabel": "Создать или отредактировать Patient"
+            },
+            "created": "Новый Patient создан с идентификатором {{ param }}",
+            "updated": "Patient обновлен с идентификатором {{ param }}",
+            "deleted": "Patient удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Patient {{ id }}?"
+            },
+            "detail": {
+                "title": "Patient"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "patronymic": "Patronymic",
+            "birthDay": "Birth Day",
+            "gender": "Gender",
+            "user": "User"
+        }
+    }
+}

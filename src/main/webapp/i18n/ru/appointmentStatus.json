@@ -1,0 +1,9 @@
+{
+    "miasApp": {
+        "AppointmentStatus" : {
+            "null": "",
+            "FREE": "FREE",
+            "BUSY": "BUSY"
+        }
+    }
+}

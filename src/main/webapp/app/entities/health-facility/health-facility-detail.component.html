@@ -1,0 +1,34 @@
+
+<div *ngIf="healthFacility">
+    <h2><span jhiTranslate="miasApp.healthFacility.detail.title">Health Facility</span> {{healthFacility.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="miasApp.healthFacility.name">Name</span></dt>
+        <dd>
+            <span>{{healthFacility.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.healthFacility.address">Address</span></dt>
+        <dd>
+            <span>{{healthFacility.address}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.healthFacility.phoneNumber">Phone Number</span></dt>
+        <dd>
+            <span>{{healthFacility.phoneNumber}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'health-facility/'+ healthFacility.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

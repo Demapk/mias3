@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span jhiTranslate="miasApp.patient.home.title">Patients</span>
+        <button class="btn btn-primary float-right jh-create-entity create-patient" [routerLink]="['/', { outlets: { popup: ['patient-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="miasApp.patient.home.createLabel">
+            Create new Patient
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="patients">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="miasApp.patient.firstName">First Name</span></th>
+            <th><span jhiTranslate="miasApp.patient.lastName">Last Name</span></th>
+            <th><span jhiTranslate="miasApp.patient.patronymic">Patronymic</span></th>
+            <th><span jhiTranslate="miasApp.patient.birthDay">Birth Day</span></th>
+            <th><span jhiTranslate="miasApp.patient.gender">Gender</span></th>
+            <th><span jhiTranslate="miasApp.patient.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let patient of patients ;trackBy: trackId">
+                <td><a [routerLink]="['../patient', patient.id ]">{{patient.id}}</a></td>
+                <td>{{patient.firstName}}</td>
+                <td>{{patient.lastName}}</td>
+                <td>{{patient.patronymic}}</td>
+                <td>{{patient.birthDay | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'miasApp.Gender.' + patient.gender}}">{{patient.gender}}</td>
+                <td>
+                    {{patient.userId}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../patient', patient.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'patient/'+ patient.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'patient/'+ patient.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

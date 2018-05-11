@@ -1,0 +1,46 @@
+
+<div *ngIf="appointment">
+    <h2><span jhiTranslate="miasApp.appointment.detail.title">Appointment</span> {{appointment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="miasApp.appointment.startTime">Start Time</span></dt>
+        <dd>
+            <span>{{appointment.startTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.appointment.endTime">End Time</span></dt>
+        <dd>
+            <span>{{appointment.endTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.appointment.status">Status</span></dt>
+        <dd>
+            <span jhiTranslate="{{'miasApp.AppointmentStatus.' + appointment.status}}">{{appointment.status}}</span>
+        </dd>
+        <dt><span jhiTranslate="miasApp.appointment.doctor">Doctor</span></dt>
+        <dd>
+            <div *ngIf="appointment.doctorId">
+                <a [routerLink]="['/doctor', appointment.doctorId]">{{appointment.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="miasApp.appointment.patient">Patient</span></dt>
+        <dd>
+            <div *ngIf="appointment.patientId">
+                <a [routerLink]="['/patient', appointment.patientId]">{{appointment.patientId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'appointment/'+ appointment.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
