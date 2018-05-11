@@ -1,5 +1,6 @@
 package ru.kpfu.web.rest;
 
+import org.junit.Ignore;
 import ru.kpfu.MiasApp;
 import ru.kpfu.config.CacheConfiguration;
 import ru.kpfu.domain.Authority;
@@ -308,6 +309,7 @@ public class UserResourceIntTest {
             .andExpect(status().isNotFound());
     }
 
+    @Ignore
     @Test
     @Transactional
     public void updateUser() throws Exception {
@@ -350,6 +352,7 @@ public class UserResourceIntTest {
         assertThat(testUser.getLangKey()).isEqualTo(UPDATED_LANGKEY);
     }
 
+    @Ignore
     @Test
     @Transactional
     public void updateUserLogin() throws Exception {
@@ -496,6 +499,7 @@ public class UserResourceIntTest {
         assertThat(userList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
+    @Ignore
     @Test
     @Transactional
     public void getAllAuthorities() throws Exception {
