@@ -5,6 +5,7 @@ import { MiasSpecialityModule } from './speciality/speciality.module';
 import { MiasHealthFacilityModule } from './health-facility/health-facility.module';
 import { MiasPatientModule } from './patient/patient.module';
 import { MiasAppointmentModule } from './appointment/appointment.module';
+import { MiasMessageModule } from './message/message.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MiasAppointmentModule } from './appointment/appointment.module';
         MiasHealthFacilityModule,
         MiasPatientModule,
         MiasAppointmentModule,
+        MiasMessageModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

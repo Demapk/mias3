@@ -12,6 +12,7 @@
                 "healthFacility": "Health Facility",
                 "patient": "Patient",
                 "appointment": "Appointment",
+                "message": "Message",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

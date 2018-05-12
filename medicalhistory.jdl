@@ -1,0 +1,23 @@
+entity MedicalHistory {
+	heartFailure Boolean,
+    ischemicHearDisease Boolean,
+    respiratory Boolean,
+    renalFailure Boolean,
+    hypertension Boolean,
+    bleedingDisorder Boolean,
+    malnutrition Boolean,
+    cirrhosis Boolean,
+    diabetes Boolean,
+    cigaretteUse Boolean,
+    alcoholUse Boolean,
+    drugUse Boolean,
+    other String
+}
+
+relationship OneToOne {
+	MedicalHistory{patient} to Patient{medicalHistory}
+}
+
+dto * with mapstruct
+
+service all with serviceClass

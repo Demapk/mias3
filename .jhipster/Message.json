@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "message"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sentTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180512094409",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "message",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}

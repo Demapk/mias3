@@ -1,16 +1,22 @@
 package ru.kpfu.service;
 
-import ru.kpfu.domain.Appointment;
-import ru.kpfu.repository.AppointmentRepository;
-import ru.kpfu.service.dto.AppointmentDTO;
-import ru.kpfu.service.mapper.AppointmentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.domain.Appointment;
+import ru.kpfu.domain.Patient;
+import ru.kpfu.repository.AppointmentRepository;
+import ru.kpfu.repository.PatientRepository;
+import ru.kpfu.repository.UserRepository;
+import ru.kpfu.security.SecurityUtils;
+import ru.kpfu.service.dto.AppointmentDTO;
+import ru.kpfu.service.mapper.AppointmentMapper;
+import ru.kpfu.web.rest.errors.InternalServerErrorException;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -24,10 +30,16 @@ public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
+    private final UserRepository userRepository;
+
+    private final PatientRepository patientRepository;
+
     private final AppointmentMapper appointmentMapper;
 
-    public AppointmentService(AppointmentRepository appointmentRepository, AppointmentMapper appointmentMapper) {
+    public AppointmentService(AppointmentRepository appointmentRepository, UserRepository userRepository, PatientRepository patientRepository, AppointmentMapper appointmentMapper) {
         this.appointmentRepository = appointmentRepository;
+        this.userRepository = userRepository;
+        this.patientRepository = patientRepository;
         this.appointmentMapper = appointmentMapper;
     }
 
@@ -80,7 +92,15 @@ public class AppointmentService {
         appointmentRepository.delete(id);
     }
 
-    public AppointmentDTO makeAppointment() {
+    public AppointmentDTO makeAppointment(Long appointmentId) {
+        String userLogin = SecurityUtils.getCurrentUserLogin()
+            .orElseThrow(() -> new InternalServerErrorException("Current user login not found"));
+        Optional<Patient> patient = patientRepository.findOneByUserLogin(userLogin);
+        if (!patient.isPresent()) {
+            throw new InternalServerErrorException("User could not be found");
+        }
+        Appointment appointment = appointmentRepository.findOne(appointmentId);
+
         return null;
     }
 
