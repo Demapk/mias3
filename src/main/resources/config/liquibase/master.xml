@@ -15,4 +15,5 @@
     <include file="config/liquibase/changelog/20180511010549_added_entity_constraints_Patient.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180511010550_added_entity_constraints_Appointment.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20180512011350_added_patient_data.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

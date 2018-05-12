@@ -79,4 +79,9 @@ public class AppointmentService {
         log.debug("Request to delete Appointment : {}", id);
         appointmentRepository.delete(id);
     }
+
+    public AppointmentDTO makeAppointment() {
+        return null;
+    }
+
 }
