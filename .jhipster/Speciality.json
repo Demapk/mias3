@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "doctor",
+            "otherEntityName": "doctor",
+            "otherEntityRelationshipName": "speciality"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "speciality",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180518172045",
+    "entityTableName": "speciality",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

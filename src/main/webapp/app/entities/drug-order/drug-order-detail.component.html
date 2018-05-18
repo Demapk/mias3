@@ -1,0 +1,66 @@
+
+<div *ngIf="drugOrder">
+    <h2><span>Drug Order</span> {{drugOrder.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Dose</span></dt>
+        <dd>
+            <span>{{drugOrder.dose}}</span>
+        </dd>
+        <dt><span>Daily Dose</span></dt>
+        <dd>
+            <span>{{drugOrder.dailyDose}}</span>
+        </dd>
+        <dt><span>Units</span></dt>
+        <dd>
+            <span>{{drugOrder.units}}</span>
+        </dd>
+        <dt><span>Frequencey</span></dt>
+        <dd>
+            <span>{{drugOrder.frequencey}}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{drugOrder.quantity}}</span>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+            <div *ngIf="drugOrder.doctorId">
+                <a [routerLink]="['/doctor', drugOrder.doctorId]">{{drugOrder.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Drug</span></dt>
+        <dd>
+            <div *ngIf="drugOrder.drugId">
+                <a [routerLink]="['/drug', drugOrder.drugId]">{{drugOrder.drugId}}</a>
+            </div>
+        </dd>
+        <dt><span>Prescription</span></dt>
+        <dd>
+            <div *ngIf="drugOrder.prescriptionId">
+                <a [routerLink]="['/prescription', drugOrder.prescriptionId]">{{drugOrder.prescriptionId}}</a>
+            </div>
+        </dd>
+        <dt><span>Patient</span></dt>
+        <dd>
+            <div *ngIf="drugOrder.patientId">
+                <a [routerLink]="['/patient', drugOrder.patientId]">{{drugOrder.patientId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'drug-order/'+ drugOrder.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

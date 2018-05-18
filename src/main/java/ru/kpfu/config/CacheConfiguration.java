@@ -44,6 +44,21 @@ public class CacheConfiguration {
             cm.createCache(ru.kpfu.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(ru.kpfu.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(ru.kpfu.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Doctor.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Speciality.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Speciality.class.getName() + ".doctors", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Facility.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Facility.class.getName() + ".doctors", jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Patient.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Diseas.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Treatment.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Procedure.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Diagnosis.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Prescription.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.ProcedureOrder.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Drug.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.DrugOrder.class.getName(), jcacheConfiguration);
+            cm.createCache(ru.kpfu.domain.Appointment.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

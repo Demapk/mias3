@@ -1,0 +1,50 @@
+
+<div *ngIf="diagnosis">
+    <h2><span>Diagnosis</span> {{diagnosis.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{diagnosis.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>Diseas</span></dt>
+        <dd>
+            <div *ngIf="diagnosis.diseasId">
+                <a [routerLink]="['/diseas', diagnosis.diseasId]">{{diagnosis.diseasId}}</a>
+            </div>
+        </dd>
+        <dt><span>Patient</span></dt>
+        <dd>
+            <div *ngIf="diagnosis.patientId">
+                <a [routerLink]="['/patient', diagnosis.patientId]">{{diagnosis.patientId}}</a>
+            </div>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+            <div *ngIf="diagnosis.doctorId">
+                <a [routerLink]="['/doctor', diagnosis.doctorId]">{{diagnosis.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Prescription</span></dt>
+        <dd>
+            <div *ngIf="diagnosis.prescriptionId">
+                <a [routerLink]="['/prescription', diagnosis.prescriptionId]">{{diagnosis.prescriptionId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'diagnosis/'+ diagnosis.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

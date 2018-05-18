@@ -1,0 +1,78 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDrugOrderLabel">Create or edit a Drug Order</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!drugOrder.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="drugOrder.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dose">Dose</label>
+            <input type="number" class="form-control" name="dose" id="field_dose"
+                [(ngModel)]="drugOrder.dose" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dailyDose">Daily Dose</label>
+            <input type="number" class="form-control" name="dailyDose" id="field_dailyDose"
+                [(ngModel)]="drugOrder.dailyDose" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_units">Units</label>
+            <input type="text" class="form-control" name="units" id="field_units"
+                [(ngModel)]="drugOrder.units" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_frequencey">Frequencey</label>
+            <input type="text" class="form-control" name="frequencey" id="field_frequencey"
+                [(ngModel)]="drugOrder.frequencey" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="drugOrder.quantity" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_doctor">Doctor</label>
+            <select class="form-control" id="field_doctor" name="doctor" [(ngModel)]="drugOrder.doctorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="doctorOption.id" *ngFor="let doctorOption of doctors; trackBy: trackDoctorById">{{doctorOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_drug">Drug</label>
+            <select class="form-control" id="field_drug" name="drug" [(ngModel)]="drugOrder.drugId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="drugOption.id" *ngFor="let drugOption of drugs; trackBy: trackDrugById">{{drugOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_prescription">Prescription</label>
+            <select class="form-control" id="field_prescription" name="prescription" [(ngModel)]="drugOrder.prescriptionId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="prescriptionOption.id" *ngFor="let prescriptionOption of prescriptions; trackBy: trackPrescriptionById">{{prescriptionOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_patient">Patient</label>
+            <select class="form-control" id="field_patient" name="patient" [(ngModel)]="drugOrder.patientId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

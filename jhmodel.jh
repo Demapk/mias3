@@ -1,0 +1,147 @@
+entity Doctor {
+	firstName String,
+    lastName String,
+    patronymic String,
+    info String
+}
+
+entity Speciality {
+	speciality String
+}
+
+entity Facility {
+	name String,
+    address String,
+    phoneNumber String,
+    info String
+}
+
+entity Patient {
+	firstName String,
+    lastName String,
+    patronymic String,
+    birthDay LocalDate,
+    rp Integer,
+    phone String,
+    gender Gender
+}
+
+entity Diseas {
+	name String required maxlength(512),
+    code String required maxlength(20),
+    parentCode String maxlength(20),
+    nodeCount Integer required,
+    additionalInfo String
+}
+
+entity Treatment {
+	name String required maxlength(512),
+    code String required maxlength(20),
+    parentCode String maxlength(20),
+    nodeCount Integer required,
+    additionalInfo String
+}
+
+entity Procedure {
+	name String required maxlength(512),
+    code String required maxlength(20),
+    parentCode String maxlength(20),
+    nodeCount Integer required,
+    additionalInfo String
+}
+
+entity Diagnosis {
+	date Instant
+}
+
+relationship ManyToOne {
+	Diagnosis{diseas} to Diseas
+  	Diagnosis{patient} to Patient
+    	Diagnosis{doctor}  to Doctor
+        Diagnosis{prescription} to Prescription
+}
+
+entity Prescription {
+	date Instant,
+  	symptoms String,
+    examination String
+}
+
+
+entity ProcedureOrder {
+	date Instant
+}
+
+relationship ManyToOne {
+	ProcedureOrder{procedure} to Procedure
+    ProcedureOrder{prescription} to Prescription
+    ProcedureOrder{doctor} to Doctor
+  	ProcedureOrder{patient} to Patient
+}
+
+entity Drug {
+	name String,
+    code String
+}
+
+entity DrugOrder {
+	dose Double,
+    dailyDose Double,
+    units String,
+    frequencey String,
+    quantity Integer
+}
+
+
+
+relationship ManyToOne {
+	DrugOrder{doctor} to Doctor
+	DrugOrder{drug} to Drug
+	DrugOrder{prescription} to Prescription
+	DrugOrder{patient} to Patient
+}
+
+
+
+relationship ManyToOne {
+	Prescription{doctor} to Doctor,
+    Prescription{patient} to Patient,
+	Diseas{parentId} to Diseas,
+    Treatment{parentId} to Treatment
+}
+
+entity Appointment {
+	startTime Instant,
+    endTime Instant,
+    status AppointmentStatus
+}
+
+enum AppointmentStatus {
+	FREE, BUSY
+}
+
+enum Gender {
+	MALE, FEMALE, OTHER
+}
+
+relationship OneToOne {
+	Patient{user} to User,
+    Doctor{user} to User,
+    Prescription{appointment} to Appointment{prescription}
+}
+
+relationship ManyToOne {
+	Appointment{doctor} to Doctor,
+    Appointment{patient} to Patient,
+    Appointment{treatment} to Treatment,
+    Appointment{facility} to Facility
+}
+
+relationship OneToMany {
+	Speciality{doctor} to Doctor{speciality},
+    Facility{doctor} to Doctor{facility}
+}
+
+paginate Doctor with pagination
+dto * with mapstruct
+service all with serviceClass

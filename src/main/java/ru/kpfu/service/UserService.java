@@ -1,9 +1,10 @@
 package ru.kpfu.service;
 
-import ru.kpfu.config.CacheConfiguration;
 import ru.kpfu.domain.Authority;
+import ru.kpfu.domain.Patient;
 import ru.kpfu.domain.User;
 import ru.kpfu.repository.AuthorityRepository;
+import ru.kpfu.repository.PatientRepository;
 import ru.kpfu.repository.PersistentTokenRepository;
 import ru.kpfu.config.Constants;
 import ru.kpfu.repository.UserRepository;
@@ -21,6 +22,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.web.rest.vm.ManagedUserVM;
 
 import java.time.LocalDate;
 import java.time.Instant;
@@ -47,12 +49,15 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final PatientRepository patientRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager, PatientRepository patientRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.patientRepository = patientRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -123,6 +128,44 @@ public class UserService {
         return newUser;
     }
 
+    public User registerUser(ManagedUserVM userDTO) {
+
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Authority authorityPatient = authorityRepository.findOne(AuthoritiesConstants.PATIENT);
+        Set<Authority> authorities = new HashSet<>();
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+        newUser.setLogin(userDTO.getLogin());
+        // new user gets initially a generated password
+        newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(userDTO.getFirstName());
+        newUser.setLastName(userDTO.getLastName());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setImageUrl(userDTO.getImageUrl());
+        newUser.setLangKey(userDTO.getLangKey());
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authority);
+        authorities.add(authorityPatient);
+        newUser.setAuthorities(authorities);
+//        newUser = userRepository.save(newUser);
+        cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
+        cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
+        log.debug("Created Information for User: {}, id = {}", newUser, newUser.getId());
+
+        Patient patient = new Patient();
+        patient.setUser(newUser);
+        patient.setFirstName(userDTO.getFirstName());
+        patient.setLastName(userDTO.getLastName());
+        patient.setPatronymic(userDTO.getPatronymic());
+        patient.setPhone(userDTO.getPhone());
+        patientRepository.save(patient);
+        log.debug("Created Information for Patient: {}", patient);
+
+        return newUser;
+    }
     public User createUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin());

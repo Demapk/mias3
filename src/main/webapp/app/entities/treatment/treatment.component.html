@@ -1,0 +1,72 @@
+<div>
+    <h2>
+        <span>Treatments</span>
+        <button class="btn btn-primary float-right jh-create-entity create-treatment" [routerLink]="['/', { outlets: { popup: ['treatment-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Treatment
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="treatments">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Code</span></th>
+            <th><span>Parent Code</span></th>
+            <th><span>Node Count</span></th>
+            <th><span>Additional Info</span></th>
+            <th><span>Parent Id</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let treatment of treatments ;trackBy: trackId">
+                <td><a [routerLink]="['../treatment', treatment.id ]">{{treatment.id}}</a></td>
+                <td>{{treatment.name}}</td>
+                <td>{{treatment.code}}</td>
+                <td>{{treatment.parentCode}}</td>
+                <td>{{treatment.nodeCount}}</td>
+                <td>{{treatment.additionalInfo}}</td>
+                <td>
+                    <div *ngIf="treatment.parentIdId">
+                        <a [routerLink]="['../treatment', treatment.parentIdId  ]" >{{treatment.parentIdId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../treatment', treatment.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'treatment/'+ treatment.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'treatment/'+ treatment.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

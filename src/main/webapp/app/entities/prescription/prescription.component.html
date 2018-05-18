@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span>Prescriptions</span>
+        <button class="btn btn-primary float-right jh-create-entity create-prescription" [routerLink]="['/', { outlets: { popup: ['prescription-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Prescription
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="prescriptions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Date</span></th>
+            <th><span>Symptoms</span></th>
+            <th><span>Examination</span></th>
+            <th><span>Appointment</span></th>
+            <th><span>Doctor</span></th>
+            <th><span>Patient</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let prescription of prescriptions ;trackBy: trackId">
+                <td><a [routerLink]="['../prescription', prescription.id ]">{{prescription.id}}</a></td>
+                <td>{{prescription.date | date:'medium'}}</td>
+                <td>{{prescription.symptoms}}</td>
+                <td>{{prescription.examination}}</td>
+                <td>
+                    <div *ngIf="prescription.appointmentId">
+                        <a [routerLink]="['../appointment', prescription.appointmentId  ]" >{{prescription.appointmentId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="prescription.doctorId">
+                        <a [routerLink]="['../doctor', prescription.doctorId  ]" >{{prescription.doctorId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="prescription.patientId">
+                        <a [routerLink]="['../patient', prescription.patientId  ]" >{{prescription.patientId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../prescription', prescription.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'prescription/'+ prescription.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'prescription/'+ prescription.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

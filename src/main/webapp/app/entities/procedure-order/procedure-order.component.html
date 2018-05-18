@@ -1,0 +1,82 @@
+<div>
+    <h2>
+        <span>Procedure Orders</span>
+        <button class="btn btn-primary float-right jh-create-entity create-procedure-order" [routerLink]="['/', { outlets: { popup: ['procedure-order-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Procedure Order
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="procedureOrders">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Date</span></th>
+            <th><span>Procedure</span></th>
+            <th><span>Prescription</span></th>
+            <th><span>Doctor</span></th>
+            <th><span>Patient</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let procedureOrder of procedureOrders ;trackBy: trackId">
+                <td><a [routerLink]="['../procedure-order', procedureOrder.id ]">{{procedureOrder.id}}</a></td>
+                <td>{{procedureOrder.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="procedureOrder.procedureId">
+                        <a [routerLink]="['../procedure', procedureOrder.procedureId  ]" >{{procedureOrder.procedureId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="procedureOrder.prescriptionId">
+                        <a [routerLink]="['../prescription', procedureOrder.prescriptionId  ]" >{{procedureOrder.prescriptionId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="procedureOrder.doctorId">
+                        <a [routerLink]="['../doctor', procedureOrder.doctorId  ]" >{{procedureOrder.doctorId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="procedureOrder.patientId">
+                        <a [routerLink]="['../patient', procedureOrder.patientId  ]" >{{procedureOrder.patientId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../procedure-order', procedureOrder.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'procedure-order/'+ procedureOrder.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'procedure-order/'+ procedureOrder.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

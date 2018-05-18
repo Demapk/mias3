@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ProcedureOrder.
+    -->
+    <changeSet id="20180518172053-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="procedure_id"
+                                 baseTableName="procedure_order"
+                                 constraintName="fk_procedure_order_procedure_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="procedure"/>
+
+        <addForeignKeyConstraint baseColumnNames="prescription_id"
+                                 baseTableName="procedure_order"
+                                 constraintName="fk_procedure_order_prescription_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="prescription"/>
+
+        <addForeignKeyConstraint baseColumnNames="doctor_id"
+                                 baseTableName="procedure_order"
+                                 constraintName="fk_procedure_order_doctor_id"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="doctor"/>
+
+        <addForeignKeyConstraint baseColumnNames="patient_id"
+                                 baseTableName="procedure_order"
+                                 constraintName="fk_procedure_order_patient_id"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="patient"/>
+
+    </changeSet>
+</databaseChangeLog>

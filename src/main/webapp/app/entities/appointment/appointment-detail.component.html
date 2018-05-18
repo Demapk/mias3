@@ -1,0 +1,58 @@
+
+<div *ngIf="appointment">
+    <h2><span>Appointment</span> {{appointment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Start Time</span></dt>
+        <dd>
+            <span>{{appointment.startTime | date:'medium'}}</span>
+        </dd>
+        <dt><span>End Time</span></dt>
+        <dd>
+            <span>{{appointment.endTime | date:'medium'}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{appointment.status}}</span>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+            <div *ngIf="appointment.doctorId">
+                <a [routerLink]="['/doctor', appointment.doctorId]">{{appointment.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Patient</span></dt>
+        <dd>
+            <div *ngIf="appointment.patientId">
+                <a [routerLink]="['/patient', appointment.patientId]">{{appointment.patientId}}</a>
+            </div>
+        </dd>
+        <dt><span>Treatment</span></dt>
+        <dd>
+            <div *ngIf="appointment.treatmentId">
+                <a [routerLink]="['/treatment', appointment.treatmentId]">{{appointment.treatmentId}}</a>
+            </div>
+        </dd>
+        <dt><span>Facility</span></dt>
+        <dd>
+            <div *ngIf="appointment.facilityId">
+                <a [routerLink]="['/facility', appointment.facilityId]">{{appointment.facilityId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'appointment/'+ appointment.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

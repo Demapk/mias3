@@ -1,0 +1,90 @@
+<div>
+    <h2>
+        <span>Drug Orders</span>
+        <button class="btn btn-primary float-right jh-create-entity create-drug-order" [routerLink]="['/', { outlets: { popup: ['drug-order-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Drug Order
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="drugOrders">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Dose</span></th>
+            <th><span>Daily Dose</span></th>
+            <th><span>Units</span></th>
+            <th><span>Frequencey</span></th>
+            <th><span>Quantity</span></th>
+            <th><span>Doctor</span></th>
+            <th><span>Drug</span></th>
+            <th><span>Prescription</span></th>
+            <th><span>Patient</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let drugOrder of drugOrders ;trackBy: trackId">
+                <td><a [routerLink]="['../drug-order', drugOrder.id ]">{{drugOrder.id}}</a></td>
+                <td>{{drugOrder.dose}}</td>
+                <td>{{drugOrder.dailyDose}}</td>
+                <td>{{drugOrder.units}}</td>
+                <td>{{drugOrder.frequencey}}</td>
+                <td>{{drugOrder.quantity}}</td>
+                <td>
+                    <div *ngIf="drugOrder.doctorId">
+                        <a [routerLink]="['../doctor', drugOrder.doctorId  ]" >{{drugOrder.doctorId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="drugOrder.drugId">
+                        <a [routerLink]="['../drug', drugOrder.drugId  ]" >{{drugOrder.drugId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="drugOrder.prescriptionId">
+                        <a [routerLink]="['../prescription', drugOrder.prescriptionId  ]" >{{drugOrder.prescriptionId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="drugOrder.patientId">
+                        <a [routerLink]="['../patient', drugOrder.patientId  ]" >{{drugOrder.patientId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../drug-order', drugOrder.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'drug-order/'+ drugOrder.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'drug-order/'+ drugOrder.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

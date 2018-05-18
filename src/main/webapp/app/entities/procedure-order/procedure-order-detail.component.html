@@ -1,0 +1,50 @@
+
+<div *ngIf="procedureOrder">
+    <h2><span>Procedure Order</span> {{procedureOrder.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{procedureOrder.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>Procedure</span></dt>
+        <dd>
+            <div *ngIf="procedureOrder.procedureId">
+                <a [routerLink]="['/procedure', procedureOrder.procedureId]">{{procedureOrder.procedureId}}</a>
+            </div>
+        </dd>
+        <dt><span>Prescription</span></dt>
+        <dd>
+            <div *ngIf="procedureOrder.prescriptionId">
+                <a [routerLink]="['/prescription', procedureOrder.prescriptionId]">{{procedureOrder.prescriptionId}}</a>
+            </div>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+            <div *ngIf="procedureOrder.doctorId">
+                <a [routerLink]="['/doctor', procedureOrder.doctorId]">{{procedureOrder.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Patient</span></dt>
+        <dd>
+            <div *ngIf="procedureOrder.patientId">
+                <a [routerLink]="['/patient', procedureOrder.patientId]">{{procedureOrder.patientId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'procedure-order/'+ procedureOrder.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

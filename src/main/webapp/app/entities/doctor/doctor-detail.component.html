@@ -1,0 +1,54 @@
+
+<div *ngIf="doctor">
+    <h2><span>Doctor</span> {{doctor.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>First Name</span></dt>
+        <dd>
+            <span>{{doctor.firstName}}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+            <span>{{doctor.lastName}}</span>
+        </dd>
+        <dt><span>Patronymic</span></dt>
+        <dd>
+            <span>{{doctor.patronymic}}</span>
+        </dd>
+        <dt><span>Info</span></dt>
+        <dd>
+            <span>{{doctor.info}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{doctor.userId}}
+        </dd>
+        <dt><span>Speciality</span></dt>
+        <dd>
+            <div *ngIf="doctor.specialityId">
+                <a [routerLink]="['/speciality', doctor.specialityId]">{{doctor.specialityId}}</a>
+            </div>
+        </dd>
+        <dt><span>Facility</span></dt>
+        <dd>
+            <div *ngIf="doctor.facilityId">
+                <a [routerLink]="['/facility', doctor.facilityId]">{{doctor.facilityId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'doctor/'+ doctor.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
