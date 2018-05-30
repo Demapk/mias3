@@ -1,0 +1,52 @@
+
+<div *ngIf="prescription">
+    <h2><span>Prescription</span> {{prescription.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{prescription.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>Symptoms</span></dt>
+        <dd>
+            <span>{{prescription.symptoms}}</span>
+        </dd>
+        <dt><span>Examination</span></dt>
+        <dd>
+            <span>{{prescription.examination}}</span>
+        </dd>
+        <dt><span>Appointment</span></dt>
+        <dd>
+            <div *ngIf="prescription.appointmentId">
+                <a [routerLink]="['/appointment', prescription.appointmentId]">{{prescription.appointmentId}}</a>
+            </div>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+            <div *ngIf="prescription.doctorId">
+                <a [routerLink]="['/doctor', prescription.doctorId]">{{prescription.doctorId}}</a>
+            </div>
+        </dd>
+        <dt><span>Patient</span></dt>
+        <dd>
+            <div *ngIf="prescription.patientId">
+                <a [routerLink]="['/patient', prescription.patientId]">{{prescription.patientId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'prescription/'+ prescription.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

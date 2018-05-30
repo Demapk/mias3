@@ -1,0 +1,63 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPrescriptionLabel">Create or edit a Prescription</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!prescription.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="prescription.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_date">Date</label>
+            <div class="d-flex">
+                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="prescription.date"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_symptoms">Symptoms</label>
+            <input type="text" class="form-control" name="symptoms" id="field_symptoms"
+                [(ngModel)]="prescription.symptoms" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_examination">Examination</label>
+            <input type="text" class="form-control" name="examination" id="field_examination"
+                [(ngModel)]="prescription.examination" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_appointment">Appointment</label>
+            <select class="form-control" id="field_appointment" name="appointment" [(ngModel)]="prescription.appointmentId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="appointmentOption.id" *ngFor="let appointmentOption of appointments; trackBy: trackAppointmentById">{{appointmentOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_doctor">Doctor</label>
+            <select class="form-control" id="field_doctor" name="doctor" [(ngModel)]="prescription.doctorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="doctorOption.id" *ngFor="let doctorOption of doctors; trackBy: trackDoctorById">{{doctorOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_patient">Patient</label>
+            <select class="form-control" id="field_patient" name="patient" [(ngModel)]="prescription.patientId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="patientOption.id" *ngFor="let patientOption of patients; trackBy: trackPatientById">{{patientOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

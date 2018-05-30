@@ -1,0 +1,57 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "doctor",
+            "otherEntityName": "doctor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "drug",
+            "otherEntityName": "drug",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "prescription",
+            "otherEntityName": "prescription",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "patient",
+            "otherEntityName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dose",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dailyDose",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "units",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "frequencey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180518172055",
+    "entityTableName": "drug_order",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}
